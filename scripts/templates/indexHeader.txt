@@ -1,5 +1,7 @@
 +++
 title = '{{ version }}'
+bookHidden = true
+layout = "custom-docs"
 [[cascade]]
     type = 'docs'
 +++

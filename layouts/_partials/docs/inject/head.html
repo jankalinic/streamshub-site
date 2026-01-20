@@ -1,3 +1,13 @@
 {{ with resources.Get "css/asciidoc_syntax.css" }}
   <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
 {{ end }}
+
+<header class="navbar">
+  <div class="navbar-left">
+    {{ partial "docs/brand.html" . }}
+  </div>
+
+  <div class="navbar-right">
+    {{ partial "docs/search-modal.html" . }}
+  </div>
+</header>

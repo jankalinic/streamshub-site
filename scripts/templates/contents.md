@@ -1,12 +1,12 @@
 +++
-title = '{{ sourceName }} Documentation'
-linkTitle = "{{ sourceName }}"
+linkTitle = "Documentation"
+title = 'Documentation'
+draft = false
+layout = "list-versions"
+developmentBranch = "{{ developmentBranchName }}"
+[[cascade]]
+    type = 'docs'
 +++
-## In development documentation
 
-[{{ developmentBranchName }}]({{ developmentBranchIndexFile }})
-
-## Released versions documentation
-{% for tag in tags %}
-[{{ tag.name }}]({{ tag.indexFile }})
-{% endfor %}
+StreamsHub Console documentation is versioned to match each release.
+Select a version below to view installation instructions, features, and usage details for that release.

@@ -1,27 +1,10 @@
 [
     {
-        "name": "StreamsHub Console",
+        "name": "console",
         "sourceOwner": "streamshub",
         "sourceRepository": "console", 
         "developmentBranch": "main",
         "docsFolderPath": "docs/sources",
-        "tags":["0.8.3", "0.9.0"]
-    },
-    {
-        "name": "Flink SQL Runner",
-        "sourceOwner": "streamshub",
-        "sourceRepository": "flink-sql", 
-        "developmentBranch": "main",
-        "docsFolderPath": "docs",
-        "tags":["0.2.0", "0.4.0"] 
-    },
-    {
-        "name": "Flink SQL Tutorials",
-        "sourceOwner": "streamshub",
-        "sourceRepository": "flink-sql-examples", 
-        "developmentBranch": "main",
-        "docsFolderPath": "docs",
-        "tags":[],
-        "skipContentsPageCreation": true
+        "tags":["0.10.0", "0.10.1", "0.10.3"]
     }
 ]
