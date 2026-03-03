@@ -6,6 +6,9 @@ tags = ["streamshub", "kafka", "ui", "strimzi"]
 draft = false
 [cascade]
   type = 'guide'
+
+
+weight = 1
 +++
 
 # Getting started
