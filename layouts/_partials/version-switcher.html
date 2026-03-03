@@ -1,0 +1,25 @@
+{{ $currentPath := .Page.RelPermalink }}
+{{ $currentVersion := "" }}
+
+{{ range .Versions }}
+  {{ if hasPrefix $currentPath .Link }}
+    {{ $currentVersion = .Link }}
+  {{ end }}
+{{ end }}
+
+<div class="version-switcher">
+  <label for="version-select">Version:</label>
+  <select id="version-select" onchange="switchVersion(this.value)">
+    {{ range .Versions }}
+      <option value="{{ .Link }}" {{ if eq $currentVersion .Link }}selected{{ end }}>
+        {{ .Name }}
+      </option>
+    {{ end }}
+  </select>
+</div>
+
+<script>
+function switchVersion(url) {
+  window.location.href = url;
+}
+</script>

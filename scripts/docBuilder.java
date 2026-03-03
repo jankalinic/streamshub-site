@@ -290,7 +290,7 @@ class DocBuilder implements Callable<Integer> {
 
         LOGGER.info("Downloading documentation for " + source.name() + " version " + versionReference);
 
-        Path outputDirectory = docsRootPath.resolve(source.name()).resolve(versionReference);
+        Path outputDirectory = docsRootPath.resolve(versionReference);
         if (skipIfOutputFolderExists && Files.exists(outputDirectory)) {
             LOGGER.info("Folder already exists for " + source.name() + " " + versionReference + " so download will be skipped");
         } else {
@@ -328,7 +328,7 @@ class DocBuilder implements Callable<Integer> {
      */
     private Path getRelativeIndexPath(Source source, String tag) throws IOException {
 
-        Path tagBranchPath = docsRootPath.resolve(source.name()).resolve(tag);
+        Path tagBranchPath = docsRootPath.resolve(tag);
         List<Path> tagIndexFiles = FileTools.findIndexFiles(tagBranchPath);
 
         if (tagIndexFiles.isEmpty()) {
@@ -363,7 +363,7 @@ class DocBuilder implements Callable<Integer> {
             return;
         }
 
-        Path contentsFile = docsRootPath.resolve(source.name()).resolve("_index.md");
+        Path contentsFile = docsRootPath.resolve("_index.md");
         if (Files.exists(contentsFile)) {
             LOGGER.info("Contents file already exists for " + source.name() + " at " + contentsFile  + " this will be overwritten.");
             Files.delete(contentsFile);

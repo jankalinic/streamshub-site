@@ -1,52 +1,85 @@
 # StreamsHub Docs Site Source
 
-This repo holds the source code for the StreamsHub site.
+This repository contains the source code for the StreamsHub documentation site.
+It aggregates documentation from other StreamsHub repositories (like the Console) and builds a static site using Hugo.
 
-## Pulling dependant sources
-
-This site aggregates documentation from all the StreamsHub components. 
-Each component's documentation source and the versions which are included are configured via an entry in the `sources.json` file in the repository root:
-```yaml
-{
-    "name": "Flink SQL Runner",
-    "sourceOwner": "streamshub",
-    "sourceRepository": "flink-sql", 
-    "developmentBranch": "docs-dev",
-    "docsFolderPath": "docs",
-    "tags":["0.2.0"] 
-}
-```
-This file is read by the `scripts/docBuilder.java` [jbang](https://www.jbang.dev/) script. 
-You will need to install `jbang` locally in order to run the documentation build.
-
-The contents of the `docsFolderPath` in each `<sourceOwner>/<sourceRepository>` GitHub repository at each supplied reference `tag` will be pulled and placed in their own folder under `content/docs/<name>/<tag>`. 
-If a folder already exists for the given tag then it will not be pulled.
-
-The contents of the `docsFolderPath` folder on the `developmentBranch` will always be pulled on every build via the `.github/workflows/publish.yaml` GitHub Action.
-
-A contents file will be generated for each entry in the `source.json`. 
-This will contain links to the documentation for the development branch and each of the configured tags.
-You can skip this if you only want to have one version of the docs (just the development branch) by setting the `skipContentsPageCreation` key to `true`.
-
-To pull the configured sources locally you will need a [GitHub access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with permissions to access **all** the configured `<sourceOwner>/<sourceRepository>`:
-
+## Pulling Documentation Sources
+Documentation from other StreamsHub repositories is pulled automatically using the JBang script:
 ```shell
 ./scripts/docBuilder.java <github-access-token>
 ```
+This script uses a configuration file called sources.json.
+Each repository version (tag) will be pulled and built into its own versioned documentation folder.
+
+``` yaml
+{
+    "name": "StreamsHub Console",
+    "sourceOwner": "streamshub",
+    "sourceRepository": "console", 
+    "developmentBranch": "main",
+    "docsFolderPath": "docs",
+    "tags":["0.1.0"] 
+}
+``` 
+
+| Field               | Description                                                 |
+| ------------------- |-------------------------------------------------------------|
+| `name`              | Friendly name for the project.                              |
+| `sourceOwner`       | GitHub organization or user that owns the repo.             |
+| `sourceRepository`  | Repository name.                                            |
+| `developmentBranch` | Branch that contains ongoing development of docs.           |
+| `docsFolderPath`    | Path inside this repo where documentation Markdown resides. |
+| `tags`              | List of Git tags to pull versioned documentation for.       |
+
+
+
+### How It Works
+
+For each tag in tags, the script pulls the contents of docsFolderPath from that repo/tag.
+The pulled content is placed under:
+```
+content/docs/<name>/<tag>
+```
+If a folder already exists for a tag, it will not be re-pulled.
+The contents of the developmentBranch are always pulled on every build, via the GitHub Action .github/workflows/publish.yaml.
+
+### Generating a Contents Page
+The script also generates a contents file with links to:
+* The development branch documentation
+* Each configured tag/version
+If you only want the development branch, you can skip this by adding:
+``` yaml
+"skipContentsPageCreation": true
+```
+
+### Pulling Documentation Locally
+To pull documentation sources locally, you need a GitHub personal access token with access to all repositories listed in sources.json.
+``` shell
+./scripts/docBuilder.java <github-access-token>
+```
+This will pull all configured tags and the development branch and organize the documentation under `content/docs/`.
+You can build the site locally using Hugo after pulling the documentation.
 
 ## Building the site
 
 ### Prerequisites
 
-The site uses the [hugo](https://gohugo.io/) static site generator. 
-You will need to install a [recent release](https://github.com/gohugoio/hugo/releases) (the version in your package manager is probably too old) and the [PostCSS](https://gohugo.io/hugo-pipes/postcss/) packages in order to build the source.
-
+The site uses the static site generator [hugo](https://github.com/gohugoio/hugo) and the [PostCSS](https://gohugo.io/hugo-pipes/postcss/) packages in order to build the source.
+You will need to install [jbang](https://www.jbang.dev/) locally in order to run the documentation build.
 You will also need [asciidoctor](https://asciidoctor.org/) installed to build most of the documentation pages.
+To successfully build the site you may also need the full submodule `themes/hugo-book` to be present locally. Easiest way is to update the submodule:
+``` shell
+git submodule update --init --recursive
+```
 
 ### Building the site locally
 
-You can build the site by running `hugo` from the repository root.
+You can build the site by running:
+``` shell 
+hugo
+``` 
+from the repository root.
 Or run a live preview server by running:
-```shell
+``` shell
 hugo server --buildDrafts --disableFastRender  
 ```

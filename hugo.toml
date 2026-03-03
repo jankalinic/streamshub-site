@@ -40,36 +40,21 @@ enableGitInfo = true
 [menu]
 [[menu.home]]
   name = "Blog"
-  pageRef = "/blog/2025-01-13-Hello_World/"
+  pageRef = "/blog/"
   weight = 1
 
 [[menu.home]]
   name = "Documentation"
-  url = "#"
-  weight = 2
-
-[[menu.home]]
-  name = "Console"
   pageRef = "/docs/StreamsHub-Console/"
-  weight = 20
-  parent = "Documentation"
-
-[[menu.home]]
-  name = "Runner"
-  pageRef = "/docs/Flink-SQL-Runner/"
-  weight = 21
-  parent = "Documentation"
-
-[[menu.home]]
-  name = "Tutorials"
-  pageRef = "/docs/Flink-SQL-Tutorials/main/"
-  weight = 22
-  parent = "Documentation"
+  weight = 2
 
 [[menu.home]]
   name = "GitHub"
   url = "https://github.com/streamshub"
   weight = 3
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
@@ -113,7 +98,7 @@ enableGitInfo = true
   # (Optional, default true) Enables search function with fuse.js,
   # Index is built on fly, therefore it might slowdown your website.
   # Configuration for indexing can be adjusted in i18n folder per language.
-  # BookSearch = true
+   BookSearch = true
 
   # (Optional, default true) Enables comments template on pages
   # By default partals/docs/comments.html includes Disqus template

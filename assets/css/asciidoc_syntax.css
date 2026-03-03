@@ -1,7 +1,7 @@
 /* Generated using: hugo gen chromastyles --style=catppuccin-macchiato | sed 's/\.chroma/.rouge.highlight/g' > assets/css/asciidoc_syntax.css */
 
 /* Background */ .bg { color:#cad3f5;background-color:#24273a; }
-/* PreWrapper */ .rouge.highlight { color:#cad3f5;background-color:#24273a; }
+/* PreWrapper */ .rouge.highlight { color:#cad3f5;}
 /* Other */ .rouge.highlight .x {  }
 /* Error */ .rouge.highlight .err { color:#ed8796 }
 /* CodeLine */ .rouge.highlight .cl {  }

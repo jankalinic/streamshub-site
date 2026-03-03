@@ -1,55 +1,49 @@
 +++
-linkTitle = "Home"
 layout = "landing"
+title = "StreamsHub"
+subtitle = "Web-based console for exploring Apache Kafka clusters on Kubernetes."
 +++
 
-<div class="book-hero">
-
-<div class="landing-logo">
-    <img src="/favicon.svg" alt="Logo">
-    <h1>StreamsHub</h1>
-</div>
-
-Open source resources for building real-time event-driven services and data-pipelines on Kubernetes.
-
-{{< badge style="default" title="License" value="Apache-2.0" >}}
-
-<br/>
-<br/>
-
-{{<button href="/docs/Flink-SQL-Tutorials/main/">}}Explore{{</button>}}
-
-</div>
-
-There is a rich ecosystem of open source projects providing event-driven and real time data infrastructure.
-The Apache Foundation alone has a wide selection of projects in this space including; Kafka, Flink, Spark, Pulsar, Beam, Paimon, Pinot to name a few.
-The Linux and Cloud Native Computing Foundations also have their own open source offerings.
-Navigating this ecosystem is often difficult and knowing how to deploy, run and combine these projects can be daunting.
-
-StreamsHub aims to provide a curated set of open source projects, templates and tools to help infrastructure engineers create services that support event-driven architectures (EDA), running on Kubernetes, and for data-scientists and analysts to create data-pipelines and query real-time data.
-Where there is a gap in the current open source offering, that would benefit from being filled, StreamsHub will aim to host a project to fill it (for example the Flink SQL runner allowing Standalone SQL query deployments), with the aim of pushing the solution up to the main projects.
-
-<br/>
+{{< logo-background >}}
 
 {{% columns %}}
-- {{< card title="Card" image="" >}}
-  # [StreamsHub Console](/docs/StreamsHub-Console/)
-  UI for administrating [Apache Kafka](https://kafka.apache.org/) clusters.
 
-  Delivers real-time insights for monitoring, managing, and optimizing each cluster.
+- {{< card title="Card" image="" >}}
+  # [Documentation](/docs/)
+
+  Core documentation covering StreamsHub Console concepts, architecture, and usage.
+
+  Learn how the console works and how to navigate Kafka clusters with confidence.
   {{< /card >}}
 
 - {{< card title="Card" image="" >}}
-  # [Flink SQL Runner](/docs/Flink-SQL-Runner/)
-  Wrapper application and container image for use with [Flink Kubernetes Operator's](https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/) `FlinkDeployment` custom resource.
+  # [Getting Started](/getting-started)
 
-  Allows you to specify your SQL queries as arguments.
+  Install StreamsHub Console locally or in Kubernetes and connect to your first Kafka cluster.
+
+  Step-by-step guides using Minikube, Strimzi, and Helm.
   {{< /card >}}
 
 - {{< card title="Card" image="" >}}
-  # [Flink SQL Tutorials](/docs/Flink-SQL-Tutorials/main/)
-  Collection of tutorials covering many aspects of using Flink SQL.
+  # [Quick start](/quick-start)
 
-  Based on the StreamsHub [Flink SQL Examples](https://github.com/streamshub/flink-sql-examples) repository.
+  Practical examples demonstrating common Kafka workflows in StreamsHub Console.
+
+  Explore topics, inspect messages, and understand consumer groups in action.
   {{< /card >}}
+
 {{% /columns %}}
+
+<br/>
+
+Streamshub Console is an open source, web-based UI designed to help developers and operators safely explore and understand Kafka clusters.
+Instead of stitching together CLI commands or custom scripts, the console presents Kafka state in a clear and structured way, including:
+* Topics, partitions, and replication details
+* Messages with keys, values, headers, and offsets
+* Consumer groups, active members, and lag information
+
+Streamshub Console integrates naturally with Kubernetes and Strimzi, allowing it to be deployed next to existing Kafka clusters. 
+The console is read-focused by design, making it suitable for debugging and day-to-day cluster visibility without changing cluster state.
+<br/>
+
+

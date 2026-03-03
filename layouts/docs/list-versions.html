@@ -1,0 +1,57 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  {{ $docsRoot := "/content/docs" }}
+  {{ $folders := readDir $docsRoot }}
+  {{ $versions := slice }}
+
+  <!-- Collect all versions -->
+  {{ range $folders }}
+    {{ if .IsDir }}
+      {{ $versions = $versions | append .Name }}
+    {{ end }}
+  {{ end }}
+
+  <!-- Sort versions in descending order -->
+  {{ $versions = sort $versions "value" "desc" }}
+
+  <!-- Group versions by major.minor -->
+  {{ $versionTree := dict }}
+  {{ range $versions }}
+    {{ $parts := split . "." }}
+    {{ if ge (len $parts) 2 }}
+      {{ $majorMinor := printf "%s.%s" (index $parts 0) (index $parts 1) }}
+      {{ $existing := index $versionTree $majorMinor | default slice }}
+      {{ $versionTree = merge $versionTree (dict $majorMinor ($existing | append .)) }}
+    {{ end }}
+  {{ end }}
+
+  <!-- Display version tree -->
+  <div class="version-tree">
+    <h2>Available Versions</h2>
+    {{ if .Params.developmentBranch }}
+      <div class="version-group">
+        <h3>Development</h3>
+        <ul>
+          <li>
+            <a href="/docs/{{ .Params.developmentBranch }}/">{{ .Params.developmentBranch }} (latest)</a>
+          </li>
+        </ul>
+      </div>
+    {{ end }}
+
+    {{ range $majorMinor, $patchVersions := $versionTree }}
+      <div class="version-group">
+        <h3>{{ $majorMinor }}.x</h3>
+        <ul>
+          {{ range $patchVersions }}
+            <li>
+              <a href="/docs/{{ . }}/">{{ . }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

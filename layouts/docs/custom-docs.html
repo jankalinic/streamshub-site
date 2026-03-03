@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <!-- Version switcher -->
+  {{ $docsRoot := "/content/docs" }}
+  {{ $folders := readDir $docsRoot }}
+  {{ $versions := slice }}
+
+  {{ range $folders }}
+    {{ if .IsDir }}
+      {{ $versions = $versions | append (dict "Name" .Name "Link" (printf "/docs/%s/" .Name)) }}
+    {{ end }}
+  {{ end }}
+
+  {{ $context := dict "Page" . "Versions" $versions "DevelopmentBranch" "main" }}
+  {{ partial "version-switcher.html" $context }}
+
+  <!-- Page content -->
+  <h1>Documentation</h1>
+  <div class="doc-content testik">
+    {{ .Content }}
+  </div>
+{{ end }}

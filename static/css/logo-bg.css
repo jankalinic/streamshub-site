@@ -1,0 +1,31 @@
+#hero-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+#networkSvg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#network-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+#bg-content {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+#bg-content h1,
+#bg-content h2{
+    text-shadow: 0 0 1rem rgba(255, 255, 255, 0.3);
+}
